@@ -3,7 +3,7 @@ from yaml import load, FullLoader
 from collections.abc import Mapping
 
 class Content(Mapping):
-    __delimiter = "^(?:-|\+)}3{\s*$"
+    __delimiter = "^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimiter, flags=re.MULTILINE)
 
     @classmethod
@@ -23,7 +23,7 @@ class Content(Mapping):
         self.data.item()
 
     def __len__(self):
-        return  len(self.data.keys())
+        return len(self.data.keys())
     
     def __repr__(self):
         data = {}
@@ -31,7 +31,6 @@ class Content(Mapping):
             if key != "content":
                 data[key] = value
         return str(data)
-
 
     @property
     def type(self):
@@ -42,4 +41,4 @@ class Content(Mapping):
 
     @type.setter
     def type(self, type):
-        self.type = self.data["type"]
+        self.data["type"] = type
