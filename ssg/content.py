@@ -3,12 +3,12 @@ from yaml import load, FullLoader
 from collections.abc import Mapping
 
 class Content(Mapping):
-    __delimiter = "^(?:-|\+){3}\s*$"
+    __delimiter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimiter, flags=re.MULTILINE)
 
     @classmethod
     def load(cls, string):
-        _, fm, content = __regex.split(string)
+        _, fm, content = cls.__regex.split(string)
         load(fm, Loader=FullLoader)
         return cls(metadata, content)
 
